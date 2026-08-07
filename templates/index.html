@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A sustainable, source-informed two-year ML engineering preparation tracker.">
+  <title>Signal / Jane Street ML Prep</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <header class="topbar wrap">
+    <a class="brand" href="#today" aria-label="Signal prep tracker home">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span>signal<span class="brand-slash">/</span>prep</span>
+    </a>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="#today">Today</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#curriculum">Curriculum</a>
+      <a href="#notes">Notes</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" id="theme-toggle" aria-label="Switch color theme" title="Switch color theme">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.64 5.64l1.42 1.42M16.94 16.94l1.42 1.42M18.36 5.64l-1.42 1.42M7.06 16.94l-1.42 1.42M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/></svg>
+      </button>
+      <button class="button button-quiet" id="settings-open">Adjust plan</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero" id="today" aria-labelledby="page-title">
+      <div class="hero-copy animate-in">
+        <p class="eyebrow"><span class="pulse"></span> 2027–2028 · 104 weeks · sustainable by design</p>
+        <h1 id="page-title">Build depth.<br><em>Keep your edge.</em></h1>
+        <p class="hero-summary">A calm, rigorous preparation system for a machine-learning engineering path: probability, real-time ML, systems, code, and lucid thinking.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#session">Open today’s session <span aria-hidden="true">↓</span></a>
+          <button class="text-button" id="export-progress">Export progress <span aria-hidden="true">↗</span></button>
+        </div>
+      </div>
+      <aside class="date-card animate-in delay-1" aria-label="Date selector">
+        <p class="meta-label">Session date</p>
+        <label class="date-input-wrap" for="date-picker">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v4M17 3v4M4 9h16M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/></svg>
+          <input id="date-picker" type="date" aria-label="Choose session date">
+        </label>
+        <div class="date-detail"><span id="day-count">Day 001</span><span class="dot"></span><span id="week-count">Week 01</span></div>
+        <p class="date-micro">Start date is editable. The plan simply meets you where you are.</p>
+      </aside>
+    </section>
+
+    <section class="metric-row" aria-label="Your progress">
+      <article class="metric-card animate-in delay-1">
+        <div class="metric-icon violet" aria-hidden="true">↗</div>
+        <div><p class="meta-label">Program progress</p><p class="metric-value" id="program-progress">0%</p></div>
+        <div class="mini-progress"><span id="program-progress-bar"></span></div>
+      </article>
+      <article class="metric-card animate-in delay-2">
+        <div class="metric-icon gold" aria-hidden="true">✦</div>
+        <div><p class="meta-label">Learning streak</p><p class="metric-value"><span id="streak">0</span> <small>days</small></p></div>
+        <p class="metric-aside">Weekends are protected</p>
+      </article>
+      <article class="metric-card animate-in delay-3">
+        <div class="metric-icon green" aria-hidden="true">◌</div>
+        <div><p class="meta-label">This week</p><p class="metric-value" id="weekly-hours">10h</p></div>
+        <p class="metric-aside" id="week-phase">Foundation</p>
+      </article>
+    </section>
+
+    <section class="session-layout" id="session" aria-labelledby="session-heading">
+      <article class="today-card animate-in delay-2">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow" id="today-kicker">Your next intentional block</p>
+            <h2 id="session-heading">Today’s signal</h2>
+          </div>
+          <div class="completion-orb" aria-label="Session completion"><svg viewBox="0 0 44 44"><circle class="orb-track" cx="22" cy="22" r="18"/><circle class="orb-value" id="session-ring" cx="22" cy="22" r="18"/></svg><span id="session-percent">0%</span></div>
+        </div>
+        <div class="theme-line"><span class="phase-dot" id="theme-dot"></span><p id="today-theme">Loading your focused practice…</p></div>
+        <p class="session-focus" id="today-focus"></p>
+        <div id="rest-panel" class="rest-panel" hidden>
+          <div class="rest-glyph" aria-hidden="true">☾</div>
+          <div><strong>Intentional recovery day</strong><p>Rest is training infrastructure. A ten-minute recall or a walk is optional; guilt is not on the plan.</p></div>
+        </div>
+        <div class="task-stack" id="task-stack" aria-live="polite"></div>
+        <div class="session-footer">
+          <span id="session-time">2h 00m</span>
+          <span class="footer-rule"></span>
+          <span id="session-deliverable">A small, concrete output</span>
+        </div>
+      </article>
+
+      <aside class="checkin-card animate-in delay-3" aria-labelledby="checkin-heading">
+        <div>
+          <p class="eyebrow">Self-calibration</p>
+          <h2 id="checkin-heading">How’s your energy?</h2>
+          <p>Adjusting effort early beats recovering from burnout later.</p>
+        </div>
+        <div class="energy-options" role="group" aria-label="Energy level">
+          <button data-energy="1" aria-label="Energy level 1">1</button>
+          <button data-energy="2" aria-label="Energy level 2">2</button>
+          <button data-energy="3" aria-label="Energy level 3">3</button>
+          <button data-energy="4" aria-label="Energy level 4">4</button>
+          <button data-energy="5" aria-label="Energy level 5">5</button>
+        </div>
+        <textarea id="checkin-note" rows="3" maxlength="500" placeholder="Optional: what would make today manageable?"></textarea>
+        <button class="button button-subtle" id="save-checkin">Save check-in</button>
+        <p class="micro-note" id="checkin-feedback">Low energy? Finish the Concept block only; that still counts.</p>
+      </aside>
+    </section>
+
+    <section class="principles animate-in" aria-labelledby="principles-heading">
+      <div class="section-heading-wrap"><p class="eyebrow">The pace is part of the plan</p><h2 id="principles-heading">A system designed to keep going</h2></div>
+      <div class="principle-grid">
+        <article><span>01</span><h3>Start tiny</h3><p>Two hours, five days a week. No sudden heroic schedule.</p></article>
+        <article><span>02</span><h3>Earn intensity</h3><p>Practice rises in small steps only after your rhythm feels normal.</p></article>
+        <article><span>03</span><h3>Recover on purpose</h3><p>Weekend space and consolidation weeks turn effort into durable recall.</p></article>
+        <article><span>04</span><h3>Ship evidence</h3><p>Every sprint ends with a test, explanation, artifact, or useful decision.</p></article>
+      </div>
+    </section>
+
+    <section class="roadmap-section" id="roadmap" aria-labelledby="roadmap-heading">
+      <div class="section-heading-row">
+        <div><p class="eyebrow">The two-year arc</p><h2 id="roadmap-heading">Depth compounds slowly.</h2></div>
+        <p class="section-description">Each phase deliberately returns to the same core abilities at a higher level of difficulty.</p>
+      </div>
+      <div class="roadmap-track" id="roadmap-track" aria-label="Program phases"></div>
+    </section>
+
+    <section class="workflow-section animate-in" aria-labelledby="workflow-heading">
+      <div class="workflow-copy"><p class="eyebrow">Interview operating model</p><h2 id="workflow-heading">How you’ll reason in the room.</h2><p>Not a script—an adaptable sequence for unfamiliar, constraint-heavy prompts.</p></div>
+      <div class="flow-wrap">
+        <svg class="flowchart" viewBox="0 0 780 210" role="img" aria-label="Clarify, baseline, validate, stress-test, and communicate workflow">
+          <defs><linearGradient id="flow-gradient" x1="0%" x2="100%"><stop stop-color="#8f7cff"/><stop offset="1" stop-color="#5ed9c2"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+          <path class="flow-path" d="M89 105H175M253 105H339M417 105H503M581 105H667" marker-end="url(#arrow)"/>
+          <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#74739b"/></marker></defs>
+          <g class="flow-node n1"><circle cx="54" cy="105" r="35"/><text x="54" y="101">Clarify</text><text x="54" y="119">assumptions</text></g>
+          <g class="flow-node n2"><circle cx="218" cy="105" r="35"/><text x="218" y="101">Start a</text><text x="218" y="119">baseline</text></g>
+          <g class="flow-node n3"><circle cx="382" cy="105" r="35"/><text x="382" y="101">Validate</text><text x="382" y="119">honestly</text></g>
+          <g class="flow-node n4"><circle cx="546" cy="105" r="35"/><text x="546" y="101">Stress-test</text><text x="546" y="119">constraints</text></g>
+          <g class="flow-node n5"><circle cx="710" cy="105" r="35"/><text x="710" y="101">Explain</text><text x="710" y="119">trade-offs</text></g>
+        </svg>
+      </div>
+    </section>
+
+    <section class="curriculum-section" id="curriculum" aria-labelledby="curriculum-heading">
+      <div class="section-heading-row curriculum-heading"><div><p class="eyebrow">Detailed curriculum</p><h2 id="curriculum-heading">104 small, specific sprints.</h2></div><div class="curriculum-tools"><label class="select-wrap"><span class="sr-only">Filter curriculum phase</span><select id="phase-select"></select></label><span id="sprint-count" class="meta-label"></span></div></div>
+      <div class="sprint-list" id="sprint-list" aria-live="polite"></div>
+    </section>
+
+    <section class="notes-section" id="notes" aria-labelledby="notes-heading">
+      <div class="notes-intro"><p class="eyebrow">Your learning ledger</p><h2 id="notes-heading">Capture the signal.</h2><p>Keep the insight, uncertainty, or next move. Future-you will thank present-you.</p></div>
+      <div class="note-composer"><label for="note-input">A useful observation</label><textarea id="note-input" rows="4" maxlength="1200" placeholder="e.g. I can explain the formula, but I hesitate when assumptions break…"></textarea><div><span class="micro-note">Saved privately in your local tracker database.</span><button class="button button-primary" id="save-note">Add to ledger</button></div></div>
+      <div class="note-list" id="note-list"></div>
+    </section>
+
+    <section class="source-note">
+      <span class="source-mark">i</span>
+      <p><strong>Source-informed, not official.</strong> This curriculum interprets the supplied <a href="https://www.interviewquery.com/interview-guides/jane-street-machine-learning" target="_blank" rel="noreferrer">Interview Query guide</a>: probability and Bayesian reasoning, online/time-series work, production ML systems, functional-programming literacy, and clear trade-off communication. Hiring processes change; use this as deliberate preparation, not a guarantee or a substitute for current role requirements.</p>
+    </section>
+  </main>
+
+  <footer class="wrap footer"><span>Signal / Prep</span><span>Built for durable progress</span><span id="footer-year">2027–2028</span></footer>
+
+  <dialog class="settings-dialog" id="settings-dialog" aria-labelledby="settings-heading">
+    <form method="dialog" class="settings-panel" id="settings-form">
+      <div class="dialog-head"><div><p class="eyebrow">Make it yours</p><h2 id="settings-heading">Adjust the plan</h2></div><button class="icon-btn" value="cancel" aria-label="Close settings">×</button></div>
+      <label>Program start date<input type="date" id="start-date"></label>
+      <label>Target role<input type="text" id="target-role" maxlength="120" placeholder="Machine Learning Engineer"></label>
+      <label>Weekly intention<input type="text" id="weekly-goal" maxlength="220" placeholder="Show up five times; finish less, learn more."></label>
+      <p class="dialog-hint">Changing the start date moves the 104-week roadmap. Your existing completion history remains intact.</p>
+      <div class="dialog-actions"><button class="button button-quiet" value="cancel">Cancel</button><button class="button button-primary" id="save-settings" value="default">Save changes</button></div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
